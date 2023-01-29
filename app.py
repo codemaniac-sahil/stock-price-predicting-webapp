@@ -1,17 +1,24 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import pandas_datareader as data
+import pandas_datareader.data as data
 from keras.models import load_model
 import streamlit as slt
 from sklearn.preprocessing import MinMaxScaler
 
-start='2010-01-01'
-end='2021-12-31'
+import datetime as dt
+import yfinance as yf
+start = '2010-01-01'
+end = '2022-01-01'
+
+
+
 slt.title("Stock Price Prediction")
 user_input=slt.text_input('Enter Stock Ticker','AAPL')
+df = yf.Ticker(user_input)
+df = df.history(start=start, end=end) 
 
-df=data.DataReader(user_input,'yahoo',start,end)
+# df=data.DataReader(user_input,'yahoo',start,end)
 
 # Describing The Data
 
